@@ -30,22 +30,19 @@ function App() {
   const [lunchMenu, setLuncMenu] = useState(lunchData)
   const [val, setVal] = useState("")
   const [nowLunch, setNowLunch] = useState("")
-  const changeLunch = useCallback(
-    _.throttle(
-      () => {
-        // setCount(count + 1)
-        let handle = setInterval(function test() {
-          let res = Math.floor((lunchMenu.length - 1) * Math.random())
-          setLunch(res)
-          setNowLunch(lunchMenu[res])
-          // return test
-        }, 200)
-        setTimeout(() => clearInterval(handle), 2000)
-      },
-      2000,
-      { trailing: false }
-    ),
-    []
+  const changeLunch = _.throttle(
+    () => {
+      // setCount(count + 1)
+      let handle = setInterval(function test() {
+        let res = Math.floor((lunchMenu.length - 1) * Math.random())
+        setLunch(res)
+        setNowLunch(lunchMenu[res])
+        // return test
+      }, 200)
+      setTimeout(() => clearInterval(handle), 2000)
+    },
+    2000,
+    { trailing: false }
   )
   const inputLunch = (e: any) => {
     setVal(e.target.value)

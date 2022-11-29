@@ -2,7 +2,8 @@ import classNames from "classnames"
 import _ from "lodash"
 import React, { useCallback, useState } from "react"
 import "./App.css"
-
+import "antd/dist/reset.css"
+import { message } from "antd"
 const lunchData = [
   "拉面",
   "板面",
@@ -26,7 +27,6 @@ const lunchData = [
   "建德大包",
   "KFC",
   "麦当劳",
-  "卷饼",
 ]
 function App() {
   const [lunch, setLunch] = useState(0)
@@ -56,8 +56,12 @@ function App() {
   }
   const addLunch = () => {
     // console.log(val, "val")
-    setVal("")
-    setLuncMenu([...lunchMenu, val])
+    if (lunchMenu.some((item) => item === val)) {
+      return message.warning("食谱中已存在")
+    } else {
+      setVal("")
+      setLuncMenu([...lunchMenu, val])
+    }
   }
   return (
     <div className="App">

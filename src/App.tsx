@@ -23,6 +23,10 @@ const lunchData = [
   "刀削面",
   "油泼面",
   "黄焖鸡",
+  "建德大包",
+  "KFC",
+  "麦当劳",
+  "卷饼",
 ]
 function App() {
   const [lunch, setLunch] = useState(0)

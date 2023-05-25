@@ -27,6 +27,58 @@ const lunchData = [
   "建德大包",
   "KFC",
   "麦当劳",
+  "盖浇饭",
+  "炒拉条",
+  "丁丁炒面",
+  "大盘鸡",
+  "凉皮",
+  "砂锅",
+  "炒米粉",
+  "南昌拌粉",
+  "螺狮粉",
+  "红烧牛肉面",
+  "鱼香肉丝盖浇饭",
+  "烤肉",
+  "小龙虾",
+  "韩式烤肉",
+  "披萨",
+  "汤面条",
+  "泡面",
+  "粥",
+  "烤包子",
+  "四川火锅",
+  "潮汕牛肉火锅",
+  "日料",
+  "寿司",
+  "自助火锅",
+  "小郡肝串串香",
+  "新疆菜",
+  "泰餐",
+  "广式茶点",
+  "蛙火锅",
+  "湘菜",
+  "成都冷锅串串",
+  "烤鱼",
+  "纸包鱼",
+  "辣子鸡",
+  "大盘肚",
+  "面包烤羊腿",
+  "食堂",
+  "牛排",
+  "北京烤鸭",
+  "老北京铜锅火锅",
+  "北京爆肚",
+  "北京卤煮",
+  "凉面",
+  "牛筋面",
+  "汤圆",
+  "粽子",
+  "水煎包",
+  "锅贴",
+  "铁锅鸡",
+  "鱼火锅",
+  "街边脏摊",
+  "大排档",
 ]
 function App() {
   const [lunch, setLunch] = useState(0)
@@ -34,28 +86,19 @@ function App() {
   const [lunchMenu, setLuncMenu] = useState(lunchData)
   const [val, setVal] = useState("")
   const [nowLunch, setNowLunch] = useState("")
-  const changeLunch = useCallback(
-    _.throttle(
-      () => {
-        // setCount(count + 1)
-        let handle = setInterval(function test() {
-          let res = Math.floor((lunchMenu.length - 1) * Math.random())
-          setLunch(res)
-          setNowLunch(lunchMenu[res])
-          // return test
-        }, 200)
-        setTimeout(() => clearInterval(handle), 2000)
-      },
-      2000,
-      { trailing: false }
-    ),
-    []
-  )
+  const handleMenu = (menu: string[]) => {
+    let handle = setInterval(function test() {
+      let res = Math.round((menu.length - 1) * Math.random())
+      setLunch(res)
+      setNowLunch(menu[res])
+    }, 200)
+    setTimeout(() => clearInterval(handle), 2000)
+  }
+
   const inputLunch = (e: any) => {
     setVal(e.target.value)
   }
   const addLunch = () => {
-    // console.log(val, "val")
     if (lunchMenu.some((item) => item === val)) {
       return message.warning("食谱中已存在")
     } else {
@@ -68,7 +111,7 @@ function App() {
       <div className="btn_box">
         <button
           className="btn"
-          onClick={changeLunch}
+          onClick={() => handleMenu(lunchMenu)}
           // disabled={count > 4}
         >
           中午吃啥
@@ -85,6 +128,7 @@ function App() {
           onChange={inputLunch}
           value={val}
           placeholder="请自行添加！"
+          style={{ borderColor: "pink" }}
         />
         <button onClick={addLunch}>+</button>
       </div>
